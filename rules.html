@@ -9,7 +9,7 @@
     .rules-box {
       width: 250px;
       height: 50px;
-      background-color: #4CAF50;
+      background-color: #0f172a;
       color: white;
       text-align: center;
       line-height: 50px;
@@ -42,10 +42,10 @@
   <h2>قوانين المتجر</h2>
   <p>قوانين وسياسات المتجر</p>
 
-  <!-- المربع الذي سيظهر عند الضغط عليه -->
+  <!-- مربع القوانين -->
   <div class="rules-box" onclick="toggleRules()">اضغط لعرض القوانين</div>
 
-  <!-- المحتوى الذي يحتوي على القوانين -->
+  <!-- محتوى القوانين (سيظهر عند الضغط على المربع) -->
   <div class="rules-content" id="rulesContent">
     <ul>
       <li>❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.</li>
@@ -68,13 +68,15 @@
   </div>
 
   <script>
-    // دالة لعرض أو إخفاء محتوى القوانين
     function toggleRules() {
-      var content = document.getElementById("rulesContent");
-      if (content.style.display === "none") {
-        content.style.display = "block";
+      // الحصول على عنصر القوانين
+      const rulesContent = document.getElementById('rulesContent');
+      
+      // التبديل بين إظهار وإخفاء محتوى القوانين
+      if (rulesContent.style.display === 'none' || rulesContent.style.display === '') {
+        rulesContent.style.display = 'block';
       } else {
-        content.style.display = "none";
+        rulesContent.style.display = 'none';
       }
     }
   </script>
