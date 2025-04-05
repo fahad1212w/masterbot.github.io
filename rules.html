@@ -2,124 +2,105 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قوانين المتجر</title>
+  <title>قوانين المتجر - Master Bot</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    /* تعديل الخلفية للصفحة */
     body {
-      background-color: #16213e; /* خلفية الصفحة */
-      color: white; /* تغيير لون النص إلى الأبيض */
-      font-family: Arial, sans-serif; /* تحديد الخط */
+      background-color: #16213e;
+      color: white;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      text-align: center;
     }
 
-    /* شريط الروابط العلوي */
-    ul {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      list-style: none;
-      z-index: 1000;
-      background-color: rgba(0, 0, 0, 0.5); /* خلفية شفافة */
-    }
-
-    ul li a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    ul li a:hover {
-      color: lightgreen;
-    }
-
-    /* المربع الذي يحتوي على النص "قوانين المتجر" */
+    /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
     .rules-box {
       background-color: #16213e;
       color: white;
       border-radius: 8px;
       padding: 20px;
-      margin: 20px auto;
+      margin: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 250px;
       text-align: center;
       cursor: pointer;
-      font-size: 18px;
+      transition: background-color 0.3s ease;
     }
 
-    /* تنسيق نافذة القوانين */
-    .rules-content-box {
-      display: none; /* مخفي في البداية */
+    .rules-box:hover {
+      background-color: #3a3a3a;
+    }
+
+    /* تصميم النافذة المنبثقة */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
       background-color: #252a74;
-      color: white;
       padding: 20px;
-      margin-top: 20px;
       border-radius: 10px;
       width: 80%;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-height: 400px; /* تحديد أقصى ارتفاع للمربع */
-      overflow-y: auto; /* إظهار شريط التمرير عموديًا */
+      max-width: 500px;
+      overflow-y: scroll;
+      max-height: 70vh;
     }
 
-    /* تنسيق القوانين */
-    .rules-content-box ul {
-      list-style-type: none;
-      padding: 0;
+    .close-btn {
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      float: right;
     }
 
-    .rules-content-box li {
-      margin: 10px 0;
-      font-size: 16px;
+    .close-btn:hover {
+      color: black;
     }
 
-    /* تنسيق الرابط داخل المربع */
-    a {
-      color: #00d4ff;
-      text-decoration: none;
+    .modal-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .modal-rule {
+      margin-bottom: 15px;
     }
 
+    .modal-rule p {
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- شريط الروابط العلوي -->
-  <ul>
-    <li><a href="index.html">الرئيسية</a></li>
-    <li><a href="products.html">المنتجات</a></li>
-    <li><a href="reviews.html">التقييمات</a></li>
-    <li><a href="rules.html">القوانين</a></li>
-  </ul>
-
   <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
-  <div class="rules-box" id="showRulesBox">
-    <p>قوانين المتجر</p>
+  <div id="rulesBox" class="rules-box">
+    <h2>قوانين المتجر</h2>
   </div>
 
-  <!-- المربع الذي سيحتوي على القوانين عند الضغط -->
-  <div id="rulesContentBox" class="rules-content-box">
-    <h3>قوانين المتجر</h3>
-    <ul id="rulesList">
-      <!-- القوانين ستضاف هنا باستخدام JavaScript -->
-    </ul>
+  <!-- نافذة منبثقة لعرض القوانين -->
+  <div class="modal" id="rulesModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">×</span>
+      <h2 class="modal-title">قوانين المتجر</h2>
+      <div class="modal-rules">
+        <!-- سيتم إضافة القوانين هنا -->
+      </div>
+    </div>
   </div>
 
   <script>
-    // القوانين المبدئية
+    // القوانين التي سيتم عرضها
     const rules = [
       "❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.",
       "❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.",
@@ -139,21 +120,43 @@
       "❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني."
     ];
 
-    // عند الضغط على المربع "قوانين المتجر"
-    document.getElementById('showRulesBox').addEventListener('click', function() {
-      const rulesContentBox = document.getElementById('rulesContentBox');
-      const rulesList = document.getElementById('rulesList');
+    // عرض القوانين عند الضغط على المربع
+    document.getElementById('rulesBox').addEventListener('click', function() {
+      const modal = document.getElementById('rulesModal');
+      const modalRules = document.querySelector('.modal-rules');
 
-      // إظهار المربع الذي يحتوي على القوانين
-      rulesContentBox.style.display = 'block';
+      // إفراغ محتوى القوانين القديم قبل إضافتها
+      modalRules.innerHTML = '';
 
-      // إضافة القوانين داخل المربع
-      rulesList.innerHTML = '';  // إفراغ المحتوى الحالي
+      // إضافة كل قانون داخل النافذة المنبثقة
       rules.forEach(rule => {
-        const li = document.createElement('li');
-        li.textContent = rule;
-        rulesList.appendChild(li);
+        const ruleElement = document.createElement('div');
+        ruleElement.classList.add('modal-rule');
+        const ruleText = document.createElement('p');
+        ruleText.textContent = rule;
+        ruleElement.appendChild(ruleText);
+        modalRules.appendChild(ruleElement);
       });
+
+      // إظهار النافذة المنبثقة
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // تعطيل التمرير عند ظهور النافذة
+    });
+
+    // إغلاق النافذة عند الضغط على زر الإغلاق
+    document.getElementById('closeModal').addEventListener('click', function() {
+      const modal = document.getElementById('rulesModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // إعادة التمرير بعد إغلاق النافذة
+    });
+
+    // إغلاق النافذة إذا تم الضغط خارجها
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('rulesModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
     });
   </script>
 
