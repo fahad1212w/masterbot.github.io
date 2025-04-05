@@ -2,7 +2,8 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>قوانين المتجر - Master Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قوانين المتجر</title>
   <style>
     /* تعديل الخلفية للصفحة */
     body {
@@ -11,14 +12,15 @@
       font-family: Arial, sans-serif; /* تحديد الخط */
       margin: 0;
       padding: 0;
+      text-align: center;
     }
 
-    /* تنسيق شريط الروابط العلوي */
+    /* شريط الروابط العلوي */
     ul {
       position: fixed;
       top: 0;
-      right: 0;
       left: 0;
+      right: 0;
       padding: 15px;
       display: flex;
       justify-content: center;
@@ -38,13 +40,7 @@
       color: lightgreen;
     }
 
-    /* إضافة مسافة padding أعلى المحتوى لعدم تغطيته */
-    .content {
-      padding-top: 70px;
-      text-align: center; /* مركز النص */
-    }
-
-    /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
+    /* المربع الذي يحتوي على النص "قوانين المتجر" */
     .rules-box {
       background-color: #16213e;
       color: white;
@@ -55,9 +51,10 @@
       width: 250px;
       text-align: center;
       cursor: pointer;
+      font-size: 18px;
     }
 
-    /* تنسيق المربع الذي يحتوي على القوانين */
+    /* تنسيق نافذة القوانين */
     .rules-content-box {
       display: none; /* مخفي في البداية */
       background-color: #252a74;
@@ -71,6 +68,8 @@
       margin-right: auto;
       text-align: left;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-height: 400px; /* تحديد أقصى ارتفاع للمربع */
+      overflow-y: auto; /* إظهار شريط التمرير عموديًا */
     }
 
     /* تنسيق القوانين */
@@ -81,7 +80,19 @@
 
     .rules-content-box li {
       margin: 10px 0;
+      font-size: 16px;
     }
+
+    /* تنسيق الرابط داخل المربع */
+    a {
+      color: #00d4ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -94,20 +105,17 @@
     <li><a href="rules.html">القوانين</a></li>
   </ul>
 
-  <!-- مسافة padding لعدم تغطيه العنوان -->
-  <div class="content">
-    <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
-    <div class="rules-box" id="showRulesBox">
-      <p>قوانين المتجر</p>
-    </div>
+  <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
+  <div class="rules-box" id="showRulesBox">
+    <p>قوانين المتجر</p>
+  </div>
 
-    <!-- المربع الذي سيحتوي على القوانين عند الضغط -->
-    <div id="rulesContentBox" class="rules-content-box">
-      <h3>قوانين المتجر</h3>
-      <ul id="rulesList">
-        <!-- القوانين ستضاف هنا باستخدام JavaScript -->
-      </ul>
-    </div>
+  <!-- المربع الذي سيحتوي على القوانين عند الضغط -->
+  <div id="rulesContentBox" class="rules-content-box">
+    <h3>قوانين المتجر</h3>
+    <ul id="rulesList">
+      <!-- القوانين ستضاف هنا باستخدام JavaScript -->
+    </ul>
   </div>
 
   <script>
