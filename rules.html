@@ -94,6 +94,36 @@
       font-size: 16px;
       line-height: 1.5;
     }
+
+    /* مربع صغير تحت النص "قوانين المتجر" يحتوي على روابط */
+    .links-box {
+      background-color: #4CAF50; /* لون الخلفية */
+      color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .links-box ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    .links-box li {
+      margin: 10px 0;
+    }
+
+    .links-box a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .links-box a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -110,6 +140,16 @@
       <h2>قوانين المتجر</h2>
       <div id="rulesContent"></div>
     </div>
+  </div>
+
+  <!-- مربع صغير يحتوي على الروابط -->
+  <div class="links-box">
+    <ul>
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="products.html">المنتجات</a></li>
+      <li><a href="reviews.html">التقييمات</a></li>
+      <li><a href="rules.html">القوانين</a></li>
+    </ul>
   </div>
 
   <script>
@@ -168,3 +208,4 @@
 
 </body>
 </html>
+
