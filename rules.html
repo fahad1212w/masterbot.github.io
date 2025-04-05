@@ -5,80 +5,166 @@
   <title>قوانين المتجر - Master Bot</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* تنسيق المربع الذي يحتوي على النص */
-    .rules-box {
-      width: 250px;
-      height: 50px;
-      background-color: #0f172a;
-      color: white;
-      text-align: center;
-      line-height: 50px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin: 20px auto;
+    /* تعديل الخلفية للصفحة */
+    body {
+      background-color: #16213e; /* خلفية الصفحة */
+      color: white; /* تغيير لون النص إلى الأبيض */
+      font-family: Arial, sans-serif; /* تحديد الخط */
+      margin: 0;
+      padding: 0;
     }
 
-    /* تنسيق محتوى القوانين */
-    .rules-content {
+    /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
+    .rules-box {
+      background-color: #16213e; /* لون المربع */
+      color: white; /* تغيير لون النص في المربع إلى الأبيض */
+      border-radius: 8px; /* تدوير الزوايا */
+      padding: 20px; /* إضافة مسافة داخلية للمربع */
+      margin: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للمربع */
+      cursor: pointer; /* تغيير الماوس إلى شكل اليد عند المرور على المربع */
+    }
+
+    /* تنسيق العناوين */
+    h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* تنسيق النص داخل المربع */
+    .rules-box ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .rules-box li {
+      margin: 10px 0;
+    }
+
+    /* تنسيق الروابط */
+    a {
+      color: #00d4ff; /* لون الرابط */
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* تنسيق النافذة المنبثقة */
+    .modal {
       display: none;
-      background-color: #0f172a;
-      padding: 10px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-      border-radius: 5px;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #252a74;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal p {
+      font-size: 16px;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="index.html">الرئيسية</a></li>
-      <li><a href="products.html">المنتجات</a></li>
-      <li><a href="reviews.html">التقييمات</a></li>
-      <li><a href="rules.html">القوانين</a></li>
-    </ul>
-  </nav>
 
-  <h2>قوانين المتجر</h2>
-  <p>قوانين وسياسات المتجر</p>
+  <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
+  <div id="rulesBox" class="rules-box">
+    <h2>قوانين المتجر</h2>
+  </div>
 
-  <!-- مربع القوانين -->
-  <div class="rules-box" onclick="toggleRules()">اضغط لعرض القوانين</div>
-
-  <!-- محتوى القوانين (سيظهر عند الضغط على المربع) -->
-  <div class="rules-content" id="rulesContent">
-    <ul>
-      <li>❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.</li>
-      <li>❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.</li>
-      <li>❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.</li>
-      <li>❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.</li>
-      <li>❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.</li>
-      <li>❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.</li>
-      <li>❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.</li>
-      <li>❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.</li>
-      <li>❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.</li>
-      <li>❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.</li>
-      <li>❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.</li>
-      <li>❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.</li>
-      <li>❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.</li>
-      <li>❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.</li>
-      <li>❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.</li>
-      <li>❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني.</li>
-    </ul>
+  <!-- نافذة منبثقة لعرض القوانين -->
+  <div id="rulesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>قوانين المتجر</h2>
+      <div id="rulesContent"></div>
+    </div>
   </div>
 
   <script>
-    function toggleRules() {
-      // الحصول على عنصر القوانين
+    document.addEventListener('DOMContentLoaded', function() {
+      const rulesBox = document.getElementById('rulesBox');
+      const rulesModal = document.getElementById('rulesModal');
       const rulesContent = document.getElementById('rulesContent');
-      
-      // التبديل بين إظهار وإخفاء محتوى القوانين
-      if (rulesContent.style.display === 'none' || rulesContent.style.display === '') {
-        rulesContent.style.display = 'block';
-      } else {
-        rulesContent.style.display = 'none';
-      }
-    }
+
+      // القوانين المبدئية
+      const rules = [
+        "❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.",
+        "❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.",
+        "❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.",
+        "❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.",
+        "❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.",
+        "❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.",
+        "❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.",
+        "❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.",
+        "❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.",
+        "❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.",
+        "❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.",
+        "❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.",
+        "❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.",
+        "❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.",
+        "❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.",
+        "❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني."
+      ];
+
+      // عند النقر على المربع لعرض القوانين
+      rulesBox.addEventListener('click', function() {
+        rulesContent.innerHTML = ''; // إفراغ المحتوى السابق
+        rules.forEach(rule => {
+          const p = document.createElement('p');
+          p.textContent = rule;
+          rulesContent.appendChild(p);
+        });
+        rulesModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // تعطيل التمرير عند ظهور النافذة
+      });
+
+      // إغلاق النافذة المنبثقة عند النقر على زر الإغلاق
+      document.querySelector('.close-btn').addEventListener('click', function() {
+        rulesModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // إعادة التمرير بعد إغلاق النافذة
+      });
+
+      // إغلاق النافذة إذا تم النقر خارجها
+      window.addEventListener('click', function(event) {
+        if (event.target == rulesModal) {
+          rulesModal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
   </script>
+
 </body>
 </html>
