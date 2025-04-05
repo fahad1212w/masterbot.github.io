@@ -5,6 +5,7 @@
   <title>قوانين المتجر - Master Bot</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* تصميم الصفحة الأساسية */
     body {
       background-color: #16213e;
       color: white;
@@ -13,14 +14,44 @@
       padding: 0;
     }
 
-    /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
+    /* تصميم الروابط في الأعلى */
+    ul {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    ul li {
+      font-size: 18px;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: lightgreen;
+    }
+
+    /* إضفاء تنسيق المربع الذي يحتوي على القوانين */
     .rules-box {
       background-color: #16213e;
       color: white;
       border-radius: 8px;
       padding: 20px;
-      margin: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 100px auto 20px auto;
+      width: 80%;
+      max-width: 500px;
       text-align: center;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -30,7 +61,7 @@
       background-color: #3a3a3a;
     }
 
-    /* تصميم النافذة المنبثقة */
+    /* تصميم نافذة القوانين المنبثقة */
     .modal {
       display: none;
       position: fixed;
@@ -79,11 +110,20 @@
     .modal-rule p {
       font-size: 18px;
     }
+
   </style>
 </head>
 <body>
 
-  <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
+  <!-- الروابط في أعلى الصفحة -->
+  <ul>
+    <li><a href="index.html">الرئيسية</a></li>
+    <li><a href="products.html">المنتجات</a></li>
+    <li><a href="reviews.html">التقييمات</a></li>
+    <li><a href="rules.html">القوانين</a></li>
+  </ul>
+
+  <!-- المربع الذي يحتوي على "قوانين المتجر" -->
   <div id="rulesBox" class="rules-box">
     <h2>قوانين المتجر</h2>
   </div>
