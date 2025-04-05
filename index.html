@@ -69,36 +69,46 @@
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;  /* Transition for all changes (color, size, etc.) */
+    text-shadow: 0 0 10px var(--primary); /* Initial subtle shadow */
+}
 
-        .logo:hover {
-            text-shadow: 0 0 15px var(--primary);
-        }
+.logo:hover {
+    text-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary);  /* Stronger shadow on hover */
+    transform: scale(1.1);  /* Slightly enlarge on hover */
+}
 
-        .discord-btn {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
 
-        .discord-btn:hover {
-            background: var(--hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
-        }
+.discord-btn {
+    background: var(--primary);
+    color: var(--dark);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;  /* Transition for all changes (position, background, box-shadow, etc.) */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateY(0); /* Ensure the button starts at normal position */
+}
+
+.discord-btn:hover {
+    background: var(--hover);
+    box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3); /* Create a shadow effect on hover */
+    transform: translateY(-2px);  /* Lift the button slightly on hover */
+}
+
+/* Fix animation for click effect */
+.discord-btn:active {
+    transform: translateY(2px);  /* Slight movement down when clicked */
+}
+
 
         .container {
             max-width: 1200px;
@@ -312,17 +322,16 @@
     </style>
 </head>
 <body>
- <ul style="position: fixed; top: 0; right: 0; left: 0; padding: 15px; display: flex; justify-content: center; gap: 30px; list-style: none; z-index: 1000; background: transparent;">
-  <li><a href="index.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">الرئيسية</a></li>
-  <li><a href="products.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">المنتجات</a></li>
-  <li><a href="reviews.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">التقييمات</a></li>
-  <li><a href="rules.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">القوانين</a></li>
-</ul>
-
-<!-- padding علشان العنوان ما يندفن تحت القائمة -->
-<div style="padding-top: 70px;"></div>
-
-
+    <ul style="position: fixed; top: 0; right: 0; left: 0; padding: 15px; display: flex; justify-content: center; gap: 30px; list-style: none; z-index: 1000; background: transparent;">
+        <li><a href="index.html" style="color: rgb(255, 255, 255); text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">الرئيسية</a></li>
+        <li><a href="products.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">المنتجات</a></li>
+        <li><a href="reviews.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">التقييمات</a></li>
+        <li><a href="rules.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">القوانين</a></li>
+      </ul>
+      
+      <!-- padding علشان العنوان ما يندفن تحت القائمة -->
+      <div style="padding-top: 70px;"></div>
+      
 </body>
 </html>
 
@@ -492,4 +501,6 @@
     </script>
 </body>
 </html>
+
+
 
