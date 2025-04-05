@@ -41,6 +41,7 @@
     /* إضافة مسافة padding أعلى المحتوى لعدم تغطيته */
     .content {
       padding-top: 70px;
+      text-align: center; /* مركز النص */
     }
 
     /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
@@ -56,54 +57,29 @@
       cursor: pointer;
     }
 
-    /* نافذة منبثقة (Modal) */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%; 
-      height: 100%; 
-      background-color: rgba(0,0,0,0.4); 
-      padding-top: 60px;
-    }
-
-    /* محتوى النافذة المنبثقة */
-    .modal-content {
+    /* تنسيق المربع الذي يحتوي على القوانين */
+    .rules-content-box {
+      display: none; /* مخفي في البداية */
       background-color: #252a74;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 500px;
-      border-radius: 10px;
       color: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    /* زر الإغلاق */
-    .close-btn {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close-btn:hover,
-    .close-btn:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    /* تنسيق النص داخل المربع */
-    .rules-box ul {
+    /* تنسيق القوانين */
+    .rules-content-box ul {
       list-style-type: none;
       padding: 0;
     }
 
-    .rules-box li {
+    .rules-content-box li {
       margin: 10px 0;
     }
   </style>
@@ -124,13 +100,10 @@
     <div class="rules-box" id="showRulesBox">
       <p>قوانين المتجر</p>
     </div>
-  </div>
 
-  <!-- نافذة منبثقة تحتوي على القوانين -->
-  <div id="rulesModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2>قوانين المتجر</h2>
+    <!-- المربع الذي سيحتوي على القوانين عند الضغط -->
+    <div id="rulesContentBox" class="rules-content-box">
+      <h3>قوانين المتجر</h3>
       <ul id="rulesList">
         <!-- القوانين ستضاف هنا باستخدام JavaScript -->
       </ul>
@@ -160,35 +133,21 @@
 
     // عند الضغط على المربع "قوانين المتجر"
     document.getElementById('showRulesBox').addEventListener('click', function() {
-      const modal = document.getElementById('rulesModal');
+      const rulesContentBox = document.getElementById('rulesContentBox');
       const rulesList = document.getElementById('rulesList');
 
-      // إضافة القوانين داخل النافذة المنبثقة
+      // إظهار المربع الذي يحتوي على القوانين
+      rulesContentBox.style.display = 'block';
+
+      // إضافة القوانين داخل المربع
       rulesList.innerHTML = '';  // إفراغ المحتوى الحالي
       rules.forEach(rule => {
         const li = document.createElement('li');
         li.textContent = rule;
         rulesList.appendChild(li);
       });
-
-      // عرض النافذة المنبثقة
-      modal.style.display = 'block';
-    });
-
-    // إغلاق النافذة المنبثقة عند الضغط على زر الإغلاق
-    document.querySelector('.close-btn').addEventListener('click', function() {
-      document.getElementById('rulesModal').style.display = 'none';
-    });
-
-    // إغلاق النافذة إذا تم الضغط في مكان خارج النافذة
-    window.addEventListener('click', function(event) {
-      const modal = document.getElementById('rulesModal');
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
     });
   </script>
 
 </body>
 </html>
-
