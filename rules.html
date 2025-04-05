@@ -14,21 +14,51 @@
       padding: 0;
     }
 
+    /* تنسيق الروابط في الأعلى */
+    .links-box {
+      background-color: #4CAF50; /* لون الخلفية */
+      color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px auto;
+      text-align: center;
+      width: 250px;
+    }
+
+    .links-box ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .links-box li {
+      margin: 10px 0;
+    }
+
+    .links-box a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .links-box a:hover {
+      text-decoration: underline;
+    }
+
     /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
     .rules-box {
       background-color: #16213e; /* لون المربع */
       color: white; /* تغيير لون النص في المربع إلى الأبيض */
       border-radius: 8px; /* تدوير الزوايا */
       padding: 20px; /* إضافة مسافة داخلية للمربع */
-      margin: 20px;
+      margin: 20px auto;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للمربع */
-      cursor: pointer; /* تغيير الماوس إلى شكل اليد عند المرور على المربع */
+      width: 250px; /* تحديد عرض المربع ليكون مربعًا */
+      text-align: center;
     }
 
     /* تنسيق العناوين */
     h2 {
-      font-size: 24px;
-      text-align: center;
+      font-size: 20px;
       margin-bottom: 20px;
     }
 
@@ -36,6 +66,7 @@
     .rules-box ul {
       list-style-type: none;
       padding: 0;
+      font-size: 14px;
     }
 
     .rules-box li {
@@ -94,61 +125,40 @@
       font-size: 16px;
       line-height: 1.5;
     }
-
-    /* مربع صغير تحت النص "قوانين المتجر" يحتوي على روابط */
-    .links-box {
-      background-color: #4CAF50; /* لون الخلفية */
-      color: white;
-      border-radius: 8px;
-      padding: 15px;
-      margin-top: 20px;
-    }
-
-    .links-box ul {
-      list-style-type: none;
-      padding: 0;
-      text-align: center;
-    }
-
-    .links-box li {
-      margin: 10px 0;
-    }
-
-    .links-box a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .links-box a:hover {
-      text-decoration: underline;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
-  <div id="rulesBox" class="rules-box">
-    <h2>قوانين المتجر</h2>
-  </div>
-
-  <!-- نافذة منبثقة لعرض القوانين -->
-  <div id="rulesModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2>قوانين المتجر</h2>
-      <div id="rulesContent"></div>
-    </div>
-  </div>
-
-  <!-- مربع صغير يحتوي على الروابط -->
+  <!-- مربع يحتوي على الروابط في الأعلى -->
   <div class="links-box">
     <ul>
       <li><a href="index.html">الرئيسية</a></li>
       <li><a href="products.html">المنتجات</a></li>
       <li><a href="reviews.html">التقييمات</a></li>
       <li><a href="rules.html">القوانين</a></li>
+    </ul>
+  </div>
+
+  <!-- المربع الذي يحتوي على النص "قوانين المتجر" -->
+  <div class="rules-box">
+    <h2>قوانين المتجر</h2>
+    <ul>
+      <li>❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.</li>
+      <li>❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.</li>
+      <li>❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.</li>
+      <li>❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.</li>
+      <li>❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.</li>
+      <li>❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.</li>
+      <li>❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.</li>
+      <li>❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.</li>
+      <li>❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.</li>
+      <li>❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.</li>
+      <li>❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.</li>
+      <li>❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.</li>
+      <li>❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.</li>
+      <li>❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.</li>
+      <li>❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.</li>
+      <li>❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني.</li>
     </ul>
   </div>
 
