@@ -2,183 +2,206 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>قوانين المتجر - Master Bot</title>
+  <title>قوانين - Master Bot</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       background-color: #0f172a;
-      font-family: 'Arial', sans-serif;
       color: white;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
     }
 
-    /* روابط أعلى الصفحة */
-    .nav-links {
+    /* شريط الروابط */
+    ul.navbar {
       position: fixed;
       top: 0;
       right: 0;
       left: 0;
-      padding: 15px;
+      padding: 20px;
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
       list-style: none;
-      background-color: #1e293b;
       z-index: 1000;
+      background: #1e293b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
-    .nav-links a {
+    ul.navbar li a {
       color: white;
-      font-size: 18px;
       text-decoration: none;
-      transition: 0.3s;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: background 0.3s, color 0.3s;
     }
 
-    .nav-links a:hover {
-      color: lightgreen;
-    }
-
-    .spacer {
-      padding-top: 70px;
+    ul.navbar li a:hover {
+      background-color: #0ea5e9;
+      color: white;
     }
 
     /* زر عرض القوانين */
-    .rules-button {
+    .open-rules-btn {
+      margin-top: 150px;
       display: flex;
       justify-content: center;
-      margin-top: 100px;
     }
 
-    .rules-button button {
+    .open-rules-btn button {
       padding: 15px 30px;
       font-size: 20px;
-      background-color: #00d4ff;
+      background-color: #0ea5e9;
+      color: white;
       border: none;
-      border-radius: 10px;
-      color: #0f172a;
+      border-radius: 15px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    .rules-button button:hover {
-      background-color: #00b2d1;
+    .open-rules-btn button:hover {
+      background-color: #0284c7;
     }
 
-    /* نافذة منبثقة للقوانين */
+    /* النافذة المنبثقة */
     .modal {
       display: none;
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
+      z-index: 2000;
       left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
-      z-index: 2000;
     }
 
     .modal-content {
       background-color: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 90%;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 700px;
       max-height: 80vh;
       overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       position: relative;
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-    }
-
-    .modal-content h2 {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #00d4ff;
-    }
-
-    .modal-content ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .modal-content li {
-      background-color: #334155;
-      margin: 10px 0;
-      padding: 12px;
-      border-radius: 8px;
     }
 
     .close-btn {
       position: absolute;
       top: 10px;
-      left: 15px;
-      font-size: 20px;
-      background: none;
+      left: 10px;
+      background: transparent;
       border: none;
       color: white;
+      font-size: 25px;
       cursor: pointer;
     }
 
-    .close-btn:hover {
-      color: red;
+    .modal h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #38bdf8;
+    }
+
+    .modal ul {
+      list-style-type: disc;
+      padding: 0 25px;
+      line-height: 1.8;
+    }
+
+    .modal ul li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        width: 95%;
+        padding: 20px;
+      }
+
+      ul.navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 0;
+      }
+
+      ul.navbar li a {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- روابط التنقل -->
-  <ul class="nav-links">
+  <!-- روابط -->
+  <ul class="navbar">
     <li><a href="index.html">الرئيسية</a></li>
     <li><a href="products.html">المنتجات</a></li>
     <li><a href="reviews.html">التقييمات</a></li>
     <li><a href="rules.html">القوانين</a></li>
   </ul>
 
-  <!-- عشان ما تندفن العناصر -->
-  <div class="spacer"></div>
-
-  <!-- زر عرض القوانين -->
-  <div class="rules-button">
-    <button onclick="openModal()">قوانين المتجر</button>
+  <!-- زر لفتح القوانين -->
+  <div class="open-rules-btn">
+    <button id="openRulesBtn">قوانين</button>
   </div>
 
-  <!-- نافذة منبثقة تحتوي القوانين -->
+  <!-- النافذة المنبثقة -->
   <div class="modal" id="rulesModal">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">×</button>
+      <button class="close-btn" id="closeModalBtn">×</button>
       <h2>قوانين المتجر</h2>
       <ul>
         <li>❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.</li>
         <li>❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.</li>
         <li>❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.</li>
-        <li>❖ في حال وجود خلل برمجي، يجب التواصل مع الدعم خلال 48 ساعة.</li>
-        <li>❖ لا يمكن نقل ملكية المنتج بعد الشراء.</li>
-        <li>❖ المتجر غير مسؤول عن أي سوء استخدام للمنتج.</li>
-        <li>❖ جميع المبيعات نهائية ولا تُسترد إلا في حالات نادرة بموافقة الدعم.</li>
+        <li>❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.</li>
+        <li>❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.</li>
+        <li>❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.</li>
+        <li>❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.</li>
+        <li>❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.</li>
+        <li>❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.</li>
+        <li>❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.</li>
+        <li>❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.</li>
+        <li>❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.</li>
+        <li>❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.</li>
+        <li>❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.</li>
+        <li>❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.</li>
+        <li>❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني.</li>
       </ul>
     </div>
   </div>
 
   <script>
-    function openModal() {
-      document.getElementById('rulesModal').style.display = 'flex';
+    const openBtn = document.getElementById('openRulesBtn');
+    const modal = document.getElementById('rulesModal');
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    openBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-    }
+    });
 
-    function closeModal() {
-      document.getElementById('rulesModal').style.display = 'none';
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
       document.body.style.overflow = 'auto';
-    }
+    });
 
-    // إغلاق المودال عند النقر بالخارج
-    window.onclick = function(event) {
-      const modal = document.getElementById('rulesModal');
-      if (event.target === modal) {
-        closeModal();
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
       }
-    }
+    });
   </script>
-
 </body>
 </html>
+
