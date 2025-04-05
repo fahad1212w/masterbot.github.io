@@ -2,18 +2,9 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>قوانين المتجر - Master Bot</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قوانين المتجر</title>
   <style>
-    /* تصميم الصفحة الأساسية */
-    body {
-      background-color: #16213e;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
     /* تصميم الروابط في الأعلى */
     ul {
       position: fixed;
@@ -30,7 +21,8 @@
     }
 
     ul li {
-      font-size: 18px;
+      font-size: 22px; /* تكبير حجم الخط */
+      font-weight: bold; /* جعل الخط عريض */
     }
 
     a {
@@ -43,79 +35,84 @@
       color: lightgreen;
     }
 
-    /* إضفاء تنسيق المربع الذي يحتوي على القوانين */
+    /* تعديل الخلفية للصفحة */
+    body {
+      background-color: #16213e; /* خلفية الصفحة */
+      color: white; /* تغيير لون النص إلى الأبيض */
+      font-family: Arial, sans-serif; /* تحديد الخط */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* تنسيق المربع الذي يحتوي على النص "قوانين المتجر" */
     .rules-box {
-      background-color: #16213e;
-      color: white;
-      border-radius: 8px;
-      padding: 20px;
-      margin: 100px auto 20px auto;
-      width: 80%;
-      max-width: 500px;
-      text-align: center;
+      background-color: #16213e; /* لون المربع */
+      color: white; /* تغيير لون النص في المربع إلى الأبيض */
+      border-radius: 8px; /* تدوير الزوايا */
+      padding: 20px; /* إضافة مسافة داخلية للمربع */
+      margin: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف للمربع */
+      width: 60%;
+      margin: 100px auto;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      text-align: center;
     }
 
     .rules-box:hover {
-      background-color: #3a3a3a;
+      background-color: #45a049;
     }
 
-    /* تصميم نافذة القوانين المنبثقة */
+    /* تنسيق نافذة القوانين المنبثقة */
     .modal {
       display: none;
       position: fixed;
-      top: 0;
+      z-index: 1;
       left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
     }
 
     .modal-content {
       background-color: #252a74;
+      margin: 5% auto;
       padding: 20px;
-      border-radius: 10px;
+      border: 1px solid #888;
       width: 80%;
       max-width: 500px;
-      overflow-y: scroll;
-      max-height: 70vh;
+      border-radius: 10px;
+      overflow-y: auto;
+      max-height: 400px; /* تحديد أقصى ارتفاع للنافذة المنبثقة */
     }
 
     .close-btn {
       color: #aaa;
+      float: right;
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
-      float: right;
     }
 
-    .close-btn:hover {
+    .close-btn:hover,
+    .close-btn:focus {
       color: black;
+      text-decoration: none;
+      cursor: pointer;
     }
 
-    .modal-title {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 20px;
+    .modal p {
+      font-size: 16px;
+      line-height: 1.5;
     }
-
-    .modal-rule {
-      margin-bottom: 15px;
-    }
-
-    .modal-rule p {
-      font-size: 18px;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- الروابط في أعلى الصفحة -->
+  <!-- قائمة الروابط في الأعلى -->
   <ul>
     <li><a href="index.html">الرئيسية</a></li>
     <li><a href="products.html">المنتجات</a></li>
@@ -123,82 +120,76 @@
     <li><a href="rules.html">القوانين</a></li>
   </ul>
 
-  <!-- المربع الذي يحتوي على "قوانين المتجر" -->
+  <!-- المربع الذي يحتوي على النص "قوانين" -->
   <div id="rulesBox" class="rules-box">
-    <h2>قوانين المتجر</h2>
+    <p>قوانين المتجر</p>
   </div>
 
   <!-- نافذة منبثقة لعرض القوانين -->
-  <div class="modal" id="rulesModal">
+  <div id="rulesModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" id="closeModal">×</span>
-      <h2 class="modal-title">قوانين المتجر</h2>
-      <div class="modal-rules">
-        <!-- سيتم إضافة القوانين هنا -->
-      </div>
+      <span class="close-btn">&times;</span>
+      <h2>قوانين المتجر</h2>
+      <div id="rulesContent"></div>
     </div>
   </div>
 
   <script>
-    // القوانين التي سيتم عرضها
-    const rules = [
-      "❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.",
-      "❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.",
-      "❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.",
-      "❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.",
-      "❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.",
-      "❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.",
-      "❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.",
-      "❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.",
-      "❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.",
-      "❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.",
-      "❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.",
-      "❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.",
-      "❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.",
-      "❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.",
-      "❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.",
-      "❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني."
-    ];
+    // عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      // المربع الذي يحتوي على النص "قوانين"
+      const rulesBox = document.getElementById('rulesBox');
+      const rulesModal = document.getElementById('rulesModal');
+      const rulesContent = document.getElementById('rulesContent');
 
-    // عرض القوانين عند الضغط على المربع
-    document.getElementById('rulesBox').addEventListener('click', function() {
-      const modal = document.getElementById('rulesModal');
-      const modalRules = document.querySelector('.modal-rules');
+      // القوانين المبدئية (تم إضافتها هنا مباشرة)
+      const rules = [
+        "❖ يجب على العميل قراءة جميع تفاصيل المنتج قبل الشراء لتجنب أي لبس أو سوء فهم.",
+        "❖ لا يمكن استرجاع أي منتج إذا تم فتحه أو استخدامه.",
+        "❖ لا يتم تعويض أي منتج تم تعديله أو تغييره من قبل العميل أو أي طرف آخر.",
+        "❖ في حال وجود خلل برمجي في المنتج، يجب على العميل التواصل مع الدعم الفني خلال 48 ساعة من الشراء.",
+        "❖ يمكن للعميل تجربة المنتج قبل الشراء في حال كان ذلك متاحًا.",
+        "❖ لا يمكن نقل ملكية المنتج إلى لاعب آخر بعد الشراء.",
+        "❖ يجب أن يكون العميل مسؤولاً عن تأكيد صحة بيانات الدفع قبل إتمام عملية الشراء.",
+        "❖ المتجر غير مسؤول عن أي أضرار ناتجة عن سوء استخدام المنتج أو التلاعب به.",
+        "❖ جميع المبالغ المدفوعة للمنتجات غير قابلة للإرجاع إلا في حال وجود خطأ من المتجر أو خلل تقني.",
+        "❖ يتم تسليم المنتج في حال كانت المدفوعات كاملة ولا يوجد أي نزاع متعلق بالدفع.",
+        "❖ في حال شراء منتج خاطئ عن طريق الخطأ، يجب على العميل طلب إلغاء الشراء خلال 24 ساعة فقط.",
+        "❖ لا يُسمح للعميل بتغيير أو تعديل المنتجات بعد شرائها مباشرة.",
+        "❖ يجب عليك التأكد من توافق المنتج مع احتياجاتك قبل الشراء.",
+        "❖ يتم تحديد مواعيد التسليم وفقًا للتوافر، ولا يتحمل المتجر أي تأخير غير ناتج عن تقصير من جانبنا.",
+        "❖ يحق للمتجر تعديل أو إضافة أي من سياسات الشراء في أي وقت دون إشعار مسبق.",
+        "❖ جميع المبيعات نهائية ولا يمكن استرجاع المبالغ المدفوعة إلا في حالات نادرة وموافقة الدعم الفني."
+      ];
 
-      // إفراغ محتوى القوانين القديم قبل إضافتها
-      modalRules.innerHTML = '';
-
-      // إضافة كل قانون داخل النافذة المنبثقة
-      rules.forEach(rule => {
-        const ruleElement = document.createElement('div');
-        ruleElement.classList.add('modal-rule');
-        const ruleText = document.createElement('p');
-        ruleText.textContent = rule;
-        ruleElement.appendChild(ruleText);
-        modalRules.appendChild(ruleElement);
+      // عند النقر على المربع لعرض القوانين
+      rulesBox.addEventListener('click', function() {
+        rulesContent.innerHTML = ''; // إفراغ المحتوى السابق
+        rules.forEach(rule => {
+          const p = document.createElement('p');
+          p.textContent = rule;
+          rulesContent.appendChild(p);
+        });
+        rulesModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // تعطيل التمرير عند ظهور النافذة
       });
 
-      // إظهار النافذة المنبثقة
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // تعطيل التمرير عند ظهور النافذة
-    });
+      // إغلاق النافذة المنبثقة عند النقر على زر الإغلاق
+      document.querySelector('.close-btn').addEventListener('click', function() {
+        rulesModal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // إعادة التمرير بعد إغلاق النافذة
+      });
 
-    // إغلاق النافذة عند الضغط على زر الإغلاق
-    document.getElementById('closeModal').addEventListener('click', function() {
-      const modal = document.getElementById('rulesModal');
-      modal.style.display = 'none';
-      document.body.style.overflow = 'auto'; // إعادة التمرير بعد إغلاق النافذة
-    });
-
-    // إغلاق النافذة إذا تم الضغط خارجها
-    window.addEventListener('click', function(event) {
-      const modal = document.getElementById('rulesModal');
-      if (event.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
+      // إغلاق النافذة إذا تم النقر خارجها
+      window.addEventListener('click', function(event) {
+        if (event.target == rulesModal) {
+          rulesModal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
     });
   </script>
 
 </body>
 </html>
+
