@@ -1,336 +1,113 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master bot</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1107292897994354748/1334058720610484314/logo.png?ex=679b2680&is=6799d500&hm=46ee3d437309edd7000ea0782fdba131ce7f2424e179336c4f0f8ce69748597b&">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+  <meta charset="UTF-8">
+  <title>منتجاتنا</title>
+  <style>
+    body {
+      background-color: #0f172a;
+      color: white;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-        :root {
-            --primary: #4ecca3;
-            --dark: #1a1a2e;
-            --light: #ffffff;
-            --hover: #45b693;
-        }
+    ul {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      z-index: 1000;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            user-select: none;
-        }
+    ul a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-        body {
-            background: linear-gradient(135deg, var(--dark), #16213e);
-            color: var(--light);
-            min-height: 100vh;
-        }
+    ul a:hover {
+      color: lightgreen;
+    }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+    .container {
+      padding-top: 100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 100px 40px 40px;
+    }
 
-        li {
-            margin-right: 20px;
-        }
+    .product {
+      background-color: white;
+      color: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
 
-        a {
-            text-decoration: none;
-            color: var(--primary);
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            font-size: 18px;
-        }
+    .product:hover {
+      transform: scale(1.05);
+    }
 
-        a:hover {
-            color: var(--hover);
-        }
+    .product img {
+      width: 100%;
+      max-width: 180px;
+      margin: 0 auto 15px;
+    }
 
-        .navbar {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-        }
+    .product p {
+      font-size: 16px;
+      font-weight: 600;
+    }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
+    .price {
+      margin-top: 10px;
+      color: #0077cc;
+      font-weight: bold;
+    }
 
-        .logo:hover {
-            text-shadow: 0 0 15px var(--primary);
-        }
-
-        .discord-btn {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .discord-btn:hover {
-            background: var(--hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 100px auto 50px;
-            padding: 0 20px;
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .rule-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 1px solid rgba(78, 204, 163, 0.1);
-        }
-
-        .rule-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary);
-        }
-
-        .rule-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .rule-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--dark);
-        }
-
-        .rule-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .rule-content {
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: var(--dark);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-            border: 1px solid var(--primary);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .modal-rules {
-            margin-top: 20px;
-        }
-
-        .modal-rule-item {
-            padding: 15px;
-            border-bottom: 1px solid rgba(78, 204, 163, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .modal-rule-text {
-            flex: 1;
-        }
-
-        .modal-rule-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--light);
-        }
-
-        .modal-rule-icon i {
-            color: var(--light);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .rule-card {
-            animation: fadeIn 0.5s ease-out forwards;
-            opacity: 0;
-        }
-
-        .rule-card:nth-child(1) { animation-delay: 0.2s; }
-        .rule-card:nth-child(2) { animation-delay: 0.4s; }
-        .rule-card:nth-child(3) { animation-delay: 0.6s; }
-        .rule-card:nth-child(4) { animation-delay: 0.8s; }
-        .rule-card:nth-child(5) { animation-delay: 1s; }
-
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .discord-btn {
-                padding: 0.5rem 1rem;
-            }
-
-            .container {
-                margin-top: 80px;
-            }
-
-            .rules-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                width: 95%;
-                margin: 10px;
-            }
-
-            .modal-rule-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .modal-rule-text {
-                flex: none;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--hover);
-        }
-    </style>
+    h2 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 28px;
+      color: lightgreen;
+    }
+  </style>
 </head>
 <body>
-    <ul style="position: fixed; top: 0; right: 0; left: 0; padding: 15px; display: flex; justify-content: center; gap: 30px; list-style: none; z-index: 1000; background: transparent;">
-        <li><a href="index.html" style="color: rgb(255, 255, 255); text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">الرئيسية</a></li>
-        <li><a href="products.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">المنتجات</a></li>
-        <li><a href="reviews.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">التقييمات</a></li>
-        <li><a href="rules.html" style="color: white; text-decoration: none;" onmouseover="this.style.color='lightgreen'" onmouseout="this.style.color='white'">القوانين</a></li>
-      </ul>
-      
-      <!-- padding علشان العنوان ما يندفن تحت القائمة -->
-      <div style="padding-top: 70px;"></div>
-      
+
+  <ul>
+    <li><a href="index.html">الرئيسية</a></li>
+    <li><a href="products.html">المنتجات</a></li>
+    <li><a href="reviews.html">التقييمات</a></li>
+    <li><a href="rules.html">القوانين</a></li>
+  </ul>
+
   <h2>منتجاتنا</h2>
-  <div class="product">
-    <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-ed00-61f6-994a-6c8bdc16e584/raw?se=2025-04-05T09%3A16%3A47Z&sp=r&sv=2024-08-04&sr=b&scid=0874fb72-5a19-5173-97d5-008be01af442&skoid=3f3a9132-9530-48ef-96b7-fee5a811733f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-05T08%3A07%3A31Z&ske=2025-04-06T08%3A07%3A31Z&sks=b&skv=2024-08-04&sig=XFn5BZYFTdjCCdCoihJG6niTRhNVWEon05lAh7fdpjo%3D" alt="بوت 1">
-    <p>بوت ديسكورد يتحكم في سيرفر فايف إم - 35$</p> <!-- تم التغيير هنا -->
+
+  <div class="container">
+    <div class="product">
+      <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-ed00-61f6-994a-6c8bdc16e584/raw?se=2025-04-05T09%3A16%3A47Z&sp=r&sv=2024-08-04&sr=b&scid=0874fb72-5a19-5173-97d5-008be01af442&skoid=3f3a9132-9530-48ef-96b7-fee5a811733f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-05T08%3A07%3A31Z&ske=2025-04-06T08%3A07%3A31Z&sks=b&skv=2024-08-04&sig=XFn5BZYFTdjCCdCoihJG6niTRhNVWEon05lAh7fdpjo%3D" alt="بوت 1">
+      <p>بوت ديسكورد يتحكم في سيرفر فايف إم</p>
+      <div class="price">35$</div>
+    </div>
+
+    <div class="product">
+      <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-ed00-61f6-994a-6c8bdc16e584/raw?se=2025-04-05T09%3A16%3A47Z&sp=r&sv=2024-08-04&sr=b&scid=0874fb72-5a19-5173-97d5-008be01af442&skoid=3f3a9132-9530-48ef-96b7-fee5a811733f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-05T08%3A07%3A31Z&ske=2025-04-06T08%3A07%3A31Z&sks=b&skv=2024-08-04&sig=XFn5BZYFTdjCCdCoihJG6niTRhNVWEon05lAh7fdpjo%3D" alt="بوت 2">
+      <p>بوت متجر - يدير مبيعاتك بسهولة</p>
+      <div class="price">مجاني</div>
+    </div>
   </div>
-  <div class="product">
-    <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-ed00-61f6-994a-6c8bdc16e584/raw?se=2025-04-05T09%3A16%3A47Z&sp=r&sv=2024-08-04&sr=b&scid=0874fb72-5a19-5173-97d5-008be01af442&skoid=3f3a9132-9530-48ef-96b7-fee5a811733f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-05T08%3A07%3A31Z&ske=2025-04-06T08%3A07%3A31Z&sks=b&skv=2024-08-04&sig=XFn5BZYFTdjCCdCoihJG6niTRhNVWEon05lAh7fdpjo%3D" alt="بوت 2">
-    <p>بوت متجر - يدير مبيعاتك بسهولة</p>
-  </div>
+
 </body>
 </html>
-
